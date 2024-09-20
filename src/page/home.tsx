@@ -23,7 +23,7 @@ export default function Home() {
             try {
                 const response = await axios.get("https://api.github.com/users", {
                     headers: {
-                        "Authorization": `Bearer ` + tokenUser
+                        "Authorization": `Bearer ${tokenUser}`
                     }
                 })
 
@@ -40,7 +40,7 @@ export default function Home() {
         try {
             const response = await axios.get(`https://api.github.com/search/users?q=${nameUser}`, {
                 headers: {
-                    "Authorization": `Bearer ` + tokenUser
+                    "Authorization": `Bearer ${tokenUser}`
                 }
             })
 

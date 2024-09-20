@@ -25,7 +25,7 @@ export default function Repo() {
         try {
             const response = await axios.get("https://api.github.com/users", {
                 headers: {
-                    "Authorization": `Bearer ` + tokenUser
+                    "Authorization": `Bearer ${tokenUser}`
                 }
             })
 
@@ -46,7 +46,7 @@ export default function Repo() {
             try {
                 const response = await axios.get(`https://api.github.com/users/${params.nomeUser}/repos`, {
                     headers: {
-                        "Authorization": `Bearer ` + tokenUser
+                        "Authorization": `Bearer ${tokenUser}`
                     }
                 })
 
