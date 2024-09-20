@@ -24,7 +24,8 @@ export default function Home() {
                 }
             })
 
-            setUser(response.data)
+            setFilteredUsers(response.data);
+            setUser(response.data);
             // console.log(response.data);
         } catch (error) {
             console.log(error);
@@ -35,11 +36,20 @@ export default function Home() {
         getUsers();
     }, []);
 
-    useEffect(() => {
-        setFilteredUsers(
-            user.filter((user: userType) => user.login.toLowerCase().includes(searchTerm.toLowerCase())
-            ))
-    }, [searchTerm, user]);
+    const handleSearch = (e:React.FormEvent) => {
+        e.preventDefault();
+        
+        if (searchTerm === "") {
+            setFilteredUsers(user);
+        } else {
+            // Aplica o filtro com base no termo de pesquisaK
+            setFilteredUsers(
+                user.filter((user: userType) =>
+                    user.login.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+            );
+        }
+    };
 
     return (
         <Container className='px-[50px] pt-[20px]'>
@@ -53,6 +63,7 @@ export default function Home() {
                     <Form
                         changeValue={(e: any) => setSearchTerm(e.target.value)}
                         inputValue={searchTerm}
+                        handleSearch={handleSearch}
                     />
                     <div className='mt-[100px]'>
                         {filteredUsers.map((card: userType) => (
