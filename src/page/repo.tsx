@@ -44,7 +44,11 @@ export default function Repo() {
     useEffect(() => {
         async function getRepoUser() {
             try {
-                const response = await axios.get(`https://api.github.com/users/${params.nomeUser}/repos`)
+                const response = await axios.get(`https://api.github.com/users/${params.nomeUser}/repos`, {
+                    headers: {
+                        "Authorization": `Bearer ` + tokenUser
+                    }
+                })
 
                 // console.log("user:", response.data);
 
