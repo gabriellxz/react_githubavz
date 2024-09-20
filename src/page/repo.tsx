@@ -29,7 +29,7 @@ export default function Repo() {
                 }
             })
 
-            const userAvatar = response.data.find((user:userType) => user.id === Number(params.idUser))
+            const userAvatar = response.data.find((user: userType) => user.id === Number(params.idUser))
             setUser(userAvatar);
             // console.log(response.data);
         } catch (error) {
@@ -70,57 +70,61 @@ export default function Repo() {
     }, [params.nomeUser, params.idUser]);
 
     return (
-        <Container className="px-[50px] pt-[20px]">
-            <Top className="flex justify-between">
-                <div className="flex items-center gap-2">
-                    <img src={union} alt="union" className='w-[32px]' />
-                    <p className='font-semibold text-grayGit-100'>github_explorer</p>
-                </div>
-                <Link to={"/"} className="flex items-center gap-3 cursor-pointer select-none">
-                    <img src={vector} alt="vector" />
-                    <p className="text-grayGit-300">Voltar</p>
-                </Link>
-            </Top>
-            <div className="flex items-center gap-5 mt-[70px]">
-                {
-                    user && <img src={user.avatar_url} alt="avatar"
-                    className="max-w-[100px] w-full rounded-full"
-                    />
-                }
+        <Container className="w-full flex justify-center px-[50px] pt-[20px]">
+            <div className="max-w-[960px] w-full">
+                <Top className="flex justify-between w-full">
+                    <div className="flex items-center gap-2">
+                        <img src={union} alt="union" className='w-[32px]' />
+                        <p className='font-semibold text-grayGit-100'>github_explorer</p>
+                    </div>
+                    <Link to={"/"} className="flex items-center gap-3 cursor-pointer select-none">
+                        <img src={vector} alt="vector" />
+                        <p className="text-grayGit-300">Voltar</p>
+                    </Link>
+                </Top>
                 <div>
-                    <p className="text-grayGit-400 text-[36px] font-bold">{params.nomeUser}/repo</p>
-                    <p className="text-whiteGit-200">Descrição do repo</p>
-                </div>
-            </div>
-            <div className="flex gap-[50px] mt-[40px]">
-                <p className="text-grayGit-400 text-3xl flex flex-col">
-                    <span className="font-bold">{stats.stars}</span>
-                    <span className="text-grayGit-500 text-[20px]">Stars</span>
-                </p>
-                <p className="text-grayGit-400 text-3xl flex flex-col">
-                    <span className="font-bold">{stats.forks}</span>
-                    <span className="text-grayGit-500 text-[20px]">Stars</span>
-                </p>
-                <p className="text-grayGit-400 text-3xl flex flex-col">
-                    <span className="font-bold">{stats.issues}</span>
-                    <span className="text-grayGit-500 text-[20px]">Issues abertas</span>
-                </p>
-            </div>
-            <div className="mt-[50px]">
-                {repo.map((r: any) => (
-                    <a
-                        target="_blank"
-                        href={r.html_url}
-                        className="max-w-[714px] w-full bg-white p-5 rounded-md flex justify-between mb-3"
-                        key={r.id}
-                    >
+                    <div className="flex items-center gap-5 mt-[70px] w-full">
+                        {
+                            user && <img src={user.avatar_url} alt="avatar"
+                                className="max-w-[100px] w-full rounded-full"
+                            />
+                        }
                         <div>
-                            <p className="text-grayGit-400 text-[24px] font-semibold">{r.name}/repo</p>
+                            <p className="text-grayGit-400 text-[36px] font-bold">{params.nomeUser}/repo</p>
                             <p className="text-whiteGit-200">Descrição do repo</p>
                         </div>
-                        <img src={arrow} alt="arrow" />
-                    </a>
-                ))}
+                    </div>
+                    <div className="flex gap-[50px] mt-[40px] w-full">
+                        <p className="text-grayGit-400 text-3xl flex flex-col">
+                            <span className="font-bold">{stats.stars}</span>
+                            <span className="text-grayGit-500 text-[20px]">Stars</span>
+                        </p>
+                        <p className="text-grayGit-400 text-3xl flex flex-col">
+                            <span className="font-bold">{stats.forks}</span>
+                            <span className="text-grayGit-500 text-[20px]">Stars</span>
+                        </p>
+                        <p className="text-grayGit-400 text-3xl flex flex-col">
+                            <span className="font-bold">{stats.issues}</span>
+                            <span className="text-grayGit-500 text-[20px]">Issues abertas</span>
+                        </p>
+                    </div>
+                    <div className="mt-[50px] w-full">
+                        {repo.map((r: any) => (
+                            <a
+                                target="_blank"
+                                href={r.html_url}
+                                className="w-full bg-white p-5 rounded-md flex justify-between mb-3"
+                                key={r.id}
+                            >
+                                <div>
+                                    <p className="text-grayGit-400 text-[24px] font-semibold">{r.name}/repo</p>
+                                    <p className="text-whiteGit-200">Descrição do repo</p>
+                                </div>
+                                <img src={arrow} alt="arrow" />
+                            </a>
+                        ))}
+                    </div> 
+                </div>
             </div>
         </Container>
     );

@@ -21,6 +21,9 @@ export default {
         greenGit: {
           100: "#04D361"
         }
+      },
+      backgroundImage: {
+        "background-github": "url('/src/assets/GitHub.png')"
       }
     },
   },
