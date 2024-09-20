@@ -6,8 +6,9 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { userType } from "../type/user";
 import axios from "axios";
-import foto from "../assets/Foto.png";
 import arrow from "../assets/Arrow.svg";
+
+const tokenUser = import.meta.env.VITE_TOKEN_USER_GITHUB
 
 export default function Repo() {
 
@@ -18,6 +19,27 @@ export default function Repo() {
         forks: 0,
         issues: 0
     })
+    const [user, setUser] = useState<userType | null>(null);
+
+    async function getUsers() {
+        try {
+            const response = await axios.get("https://api.github.com/users", {
+                headers: {
+                    "Authorization": `Bearer` + tokenUser
+                }
+            })
+
+            const userAvatar = response.data.find((user:userType) => user.id === Number(params.idUser))
+            setUser(userAvatar);
+            // console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, []);
 
     useEffect(() => {
         async function getRepoUser() {
@@ -25,7 +47,7 @@ export default function Repo() {
                 const response = await axios.get(`https://api.github.com/users/${params.nomeUser}/repos`)
 
                 // console.log("user:", response.data);
-                
+
                 const totalStats = response.data.reduce(
                     (acc: any, repo: any) => {
                         return {
@@ -36,7 +58,7 @@ export default function Repo() {
                     },
                     { stars: 0, forks: 0, issues: 0 }
                 );
-                
+
                 setRepo(response.data);
                 setStats(totalStats);
             } catch (error) {
@@ -60,7 +82,11 @@ export default function Repo() {
                 </Link>
             </Top>
             <div className="flex items-center gap-5 mt-[70px]">
-                <img src={foto} alt="perfil" />
+                {
+                    user && <img src={user.avatar_url} alt="avatar"
+                    className="max-w-[100px] w-full rounded-full"
+                    />
+                }
                 <div>
                     <p className="text-grayGit-400 text-[36px] font-bold">{params.nomeUser}/repo</p>
                     <p className="text-whiteGit-200">Descrição do repo</p>
