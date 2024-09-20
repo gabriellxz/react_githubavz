@@ -3,5 +3,8 @@
 @tailwind utilities;
 
 body {
-    @apply bg-whiteGit-100 bg-background-github bg-no-repeat bg-top 
+    background-color: #F2F2FA;
+    background-image: url(/src/assets/Github.png);
+    background-repeat: no-repeat;
+    background-position: top;
 }
