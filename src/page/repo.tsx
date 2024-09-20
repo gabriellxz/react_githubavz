@@ -8,7 +8,7 @@ import { userType } from "../type/user";
 import axios from "axios";
 import arrow from "../assets/Arrow.svg";
 
-const tokenUser = import.meta.env.VITE_TOKEN_USER_GITHUB
+// const tokenUser = import.meta.env.VITE_TOKEN_USER_GITHUB
 
 export default function Repo() {
 
@@ -25,7 +25,7 @@ export default function Repo() {
         try {
             const response = await axios.get("https://api.github.com/users", {
                 headers: {
-                    "Authorization": `Bearer ` + tokenUser
+                    "Authorization": `Bearer ` + import.meta.env.VITE_TOKEN_USER_GITHUB
                 }
             })
 
@@ -46,7 +46,7 @@ export default function Repo() {
             try {
                 const response = await axios.get(`https://api.github.com/users/${params.nomeUser}/repos`, {
                     headers: {
-                        "Authorization": `Bearer ` + tokenUser
+                        "Authorization": `Bearer ` + import.meta.env.VITE_TOKEN_USER_GITHUB
                     }
                 })
 

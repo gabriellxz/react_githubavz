@@ -10,7 +10,7 @@ import union from "../assets/Union.svg";
 import arrow from "../assets/Arrow.svg";
 import { toast, Toaster } from "sonner";
 
-const tokenUser = import.meta.env.VITE_TOKEN_USER_GITHUB
+// const tokenUser = import.meta.env.VITE_TOKEN_USER_GITHUB
 
 export default function Home() {
     // const [user, setUser] = useState<userType | null>(null);
@@ -23,10 +23,11 @@ export default function Home() {
             try {
                 const response = await axios.get("https://api.github.com/users", {
                     headers: {
-                        "Authorization": `Bearer ` + tokenUser
+                        "Authorization": `Bearer ` + import.meta.env.VITE_TOKEN_USER_GITHUB
                     }
                 })
 
+                // console.log(response)
                 setUserDefaults(response.data);
             } catch (error) {
                 console.log(error);
@@ -40,7 +41,7 @@ export default function Home() {
         try {
             const response = await axios.get(`https://api.github.com/search/users?q=${nameUser}`, {
                 headers: {
-                    "Authorization": `Bearer ` + tokenUser
+                    "Authorization": `Bearer ` + import.meta.env.VITE_TOKEN_USER_GITHUB
                 }
             })
 
